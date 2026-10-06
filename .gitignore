@@ -1,0 +1,45 @@
+# Quartus build output
+db/
+incremental_db/
+output_files/
+simulation/
+greybox_tmp/
+qdb/
+tmp-clearbox/
+
+# Generated/temp files
+*.rpt
+*.summary
+*.smsg
+*.qws
+*.bak
+*.done
+*.jdi
+*.pin
+*.sld
+*.sof
+*.pof
+*.rbf
+*.cdf
+*.ddb
+*.qarlog
+*.sdo
+*.vo
+*.vho
+c5_pin_model_dump.txt
+
+# ModelSim/Questa
+work/
+transcript
+vsim.wlf
+*.mpf
+*.cr.mti
+
+# Platform Designer (Qsys) generated
+*/synthesis/
+*/simulation/
+.qsys_edit/
+
+# OS/editor
+.DS_Store
+Thumbs.db
