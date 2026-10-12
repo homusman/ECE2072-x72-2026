@@ -1,18 +1,18 @@
-Fitter Status : Successful - Tue Oct 06 19:19:59 2026
+Fitter Status : Successful - Tue Oct 13 00:47:09 2026
 Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : x72
-Top-level Entity Name : tick_FSM_top
+Top-level Entity Name : proc_top_level
 Family : MAX 10
 Device : 10M50DAF484C7G
 Timing Models : Final
-Total logic elements : 5 / 49,760 ( < 1 % )
-    Total combinational functions : 5 / 49,760 ( < 1 % )
-    Dedicated logic registers : 4 / 49,760 ( < 1 % )
-Total registers : 4
-Total pins : 22 / 360 ( 6 % )
+Total logic elements : 315 / 49,760 ( < 1 % )
+    Total combinational functions : 314 / 49,760 ( < 1 % )
+    Dedicated logic registers : 45 / 49,760 ( < 1 % )
+Total registers : 45
+Total pins : 36 / 360 ( 10 % )
 Total virtual pins : 0
 Total memory bits : 0 / 1,677,312 ( 0 % )
-Embedded Multiplier 9-bit elements : 0 / 288 ( 0 % )
+Embedded Multiplier 9-bit elements : 2 / 288 ( < 1 % )
 Total PLLs : 0 / 4 ( 0 % )
 UFM blocks : 0 / 1 ( 0 % )
 ADC blocks : 0 / 2 ( 0 % )

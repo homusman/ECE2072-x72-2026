@@ -1,6 +1,6 @@
 module register_n #(parameter N=16) (
     input [N-1:0]data_in,
-	 input r_in
+	 input r_in,
     input clk,
     input rst, // when rst is 1, next clk edge should set Q=0
     output reg[N-1:0] Q

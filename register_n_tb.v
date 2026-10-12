@@ -68,4 +68,4 @@ module register_n_tb;
 		  
     end
 
-endmodules
+endmodule 

@@ -1,5 +1,5 @@
 
-State Machine - |tick_FSM_top|tick_FSM:u_fsm|current_state
+State Machine - |proc_top_level|simple_proc:proc|tick_FSM:tick_counter|current_state
 Name current_state.1000 current_state.0100 current_state.0010 current_state.0001 
 current_state.0001 0 0 0 0 
 current_state.0010 0 0 1 1 

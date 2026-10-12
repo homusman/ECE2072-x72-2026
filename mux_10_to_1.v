@@ -18,7 +18,7 @@ module mux_10_to_1 (
 			4'd7: Bus = R7;
 			4'd8: Bus = SignExtDin;
 			4'd9: Bus = G;
-			default: out = 16'd0;
+			default: Bus = 16'd0;
 		endcase
 	end
 endmodule
