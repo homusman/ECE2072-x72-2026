@@ -16,8 +16,8 @@ module proc_top_level(
         .din    (SW[8:0]),
         .bus    (bus),
         .tick   (tick),
-        .R0(), .R1(), .R2(), .R3(), .R4(), .R5(), .R6(), .R7()
-    );
+        .R0(), .R1(), .R2(), .R3(), .R4(), .R5(), .R6(), .R7(),
+		  .IR_DEBUG() );
 
     assign LEDR = bus[9:0];
 
@@ -37,7 +37,7 @@ module proc_top_level(
 	 // Opcode to 7-seg, active-low segments {g,f,e,d,c,b,a}
     reg [6:0] hex0_r;
     always @(*) begin
-        case (SW[8:5])
+        case (SW[8:6])
             3'd0: hex0_r = 7'b1000000; // 0
             3'd1: hex0_r = 7'b1111001; // 1
             3'd2: hex0_r = 7'b0100100; // 2

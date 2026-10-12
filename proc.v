@@ -19,7 +19,8 @@ output [15:0] R3,
 output [15:0] R4,
 output [15:0] R5,
 output [15:0] R6,
-output [15:0] R7);
+output [15:0] R7,
+output [8:0] IR_DEBUG);
 
     // Note: The skeleton you are provided with includes output ports to output the values of the internal registers R0 - R7, for the purpose of test benching. When instantiating the processor to program your DE10-lite, you can leave these ports unused.
 	 
@@ -69,6 +70,8 @@ output [15:0] R7);
 		// Instruction register
 		reg rIR_in;
 		wire [8:0] QIR;
+		
+		assign IR_DEBUG = {sel, opcode, 3'b0};
 
     // ----------------- instantiate registers:-----------------
 	 register_n #(.N(16)) Reg0(.data_in(bus), .r_in(r_in[0]), .clk(clk), .Q(Q0), .rst(rst));
@@ -139,7 +142,6 @@ output [15:0] R7);
             
             /* Tick 2 */
                 4'b0010 : begin
-                    // opcode is already decoded by combination logic, start working on the instructions:
 						  if (opcode == 1 || opcode == 3 || opcode == 4) begin
 						   // place Rx onto bus
 							sel = Rx;
@@ -154,6 +156,10 @@ output [15:0] R7);
 							// enable register A
 							rA_in = 1;
 													  
+						  end else if (opcode == 7) begin
+						   // put DIN onto the bus and save it into Rx
+							sel = 4'd8;
+						   r_in[Rx] = 1;
 						  end
 						  
                 end
