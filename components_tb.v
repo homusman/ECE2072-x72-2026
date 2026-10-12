@@ -13,7 +13,7 @@ module components_tb();
 	reg signed [8:0] sign_extender_input;
 	wire signed [15:0] sign_extender_output;
 	
-	sign_extender sign_extender_i(.in(sign_extender_input),.out(sign_extender_output));
+	sign_extender sign_extender_i(.in(sign_extender_input),.ext(sign_extender_output));
 	
 	initial begin
 		sign_extender_input = 0;
@@ -25,7 +25,7 @@ module components_tb();
 	reg clk;
 	wire [3:0] tick_FSM_outputs;
 
-	tick_FSM tick_FSM_i(.en(tick_FSM_en),.rst(tick_FSM_rst),.clk(clk),.tick(tick_FSM_outputs));
+	tick_FSM tick_FSM_i(.enable(tick_FSM_en),.rst(tick_FSM_rst),.clk(clk),.tick(tick_FSM_outputs));
 
 	initial begin
 		tick_FSM_en = 0;

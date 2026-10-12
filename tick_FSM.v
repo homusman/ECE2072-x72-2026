@@ -1,9 +1,9 @@
 // Thomas Ma, 6 Oct 2026
 
 module tick_FSM(
-input en,
 input rst,
 input clk,
+input enable,
 output [3:0] tick
 );
 	reg [3:0] current_state;
@@ -27,23 +27,23 @@ output [3:0] tick
 	always @(*) begin
 		case (current_state)
 			4'b0001:begin
-				if (en) next_state = 4'b0010;
+				if (enable) next_state = 4'b0010;
 				else next_state = 4'b0001;
 			end
 			
 			4'b0010:begin
-				if (en) next_state = 4'b0100;
+				if (enable) next_state = 4'b0100;
 				else next_state = 4'b0010;
 			
 			end
 			
 			4'b0100:begin
-				if (en) next_state = 4'b1000;
+				if (enable) next_state = 4'b1000;
 				else next_state = 4'b0100;
 			end
 			
 			4'b1000:begin
-				if (en) next_state = 4'b0001;
+				if (enable) next_state = 4'b0001;
 				else next_state = 4'b1000;
 			
 			end
