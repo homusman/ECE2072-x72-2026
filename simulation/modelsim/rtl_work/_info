@@ -1,0 +1,77 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/janej/Documents/Quartus/ECE2072/project 2026/simulation/modelsim
+vcomponents_tb
+Z1 !s110 1791291168
+!i10b 1
+!s100 mNMgHf14Q:J7za6KUgK5H2
+I:QYVIL[b0czgg2`>Q@69?0
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1791290637
+8C:/Users/janej/Documents/Quartus/ECE2072/project 2026/components_tb.v
+FC:/Users/janej/Documents/Quartus/ECE2072/project 2026/components_tb.v
+L0 3
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z4 !s108 1791291168.000000
+!s107 C:/Users/janej/Documents/Quartus/ECE2072/project 2026/components_tb.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/janej/Documents/Quartus/ECE2072/project 2026|C:/Users/janej/Documents/Quartus/ECE2072/project 2026/components_tb.v|
+!i113 1
+Z5 o-vlog01compat -work work
+Z6 !s92 -vlog01compat -work work {+incdir+C:/Users/janej/Documents/Quartus/ECE2072/project 2026}
+Z7 tCvgOpt 0
+vsign_extender
+R1
+!i10b 1
+!s100 aNXjYD86WmbV@O7MZI<5W3
+IRD`E4_A[`@_CR[W9f1?[?3
+R2
+R0
+w1791287391
+8C:/Users/janej/Documents/Quartus/ECE2072/project 2026/sign_extender.v
+FC:/Users/janej/Documents/Quartus/ECE2072/project 2026/sign_extender.v
+L0 4
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/janej/Documents/Quartus/ECE2072/project 2026/sign_extender.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/janej/Documents/Quartus/ECE2072/project 2026|C:/Users/janej/Documents/Quartus/ECE2072/project 2026/sign_extender.v|
+!i113 1
+R5
+R6
+R7
+vtick_FSM
+R1
+!i10b 1
+!s100 J3bgFY2>4Pgf><5C8hjAz0
+I@<kDGZ>jboPjWgVkbmnHG1
+R2
+R0
+w1791274649
+8C:/Users/janej/Documents/Quartus/ECE2072/project 2026/tick_FSM.v
+FC:/Users/janej/Documents/Quartus/ECE2072/project 2026/tick_FSM.v
+L0 3
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/janej/Documents/Quartus/ECE2072/project 2026/tick_FSM.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/janej/Documents/Quartus/ECE2072/project 2026|C:/Users/janej/Documents/Quartus/ECE2072/project 2026/tick_FSM.v|
+!i113 1
+R5
+R6
+R7
+ntick_@f@s@m
