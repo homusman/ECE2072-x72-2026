@@ -71,7 +71,7 @@ output [8:0] IR_DEBUG);
 		reg rIR_in;
 		wire [8:0] QIR;
 		
-		reg opcode[2:0] // James -> Added for compiler to read top to bottom
+		reg [2:0]opcode; // James -> Added for compiler to read top to bottom
 		assign IR_DEBUG = {sel, opcode, 3'b0};
 
     // ----------------- instantiate registers:-----------------

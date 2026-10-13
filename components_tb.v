@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module components_tb_syntheisised();
+module components_tb();
 
 //Defining global  flags:
 	reg sign_tick_done = 0;   // set after sign extender + tick FSM tests finish
