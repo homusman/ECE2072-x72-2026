@@ -71,6 +71,7 @@ output [8:0] IR_DEBUG);
 		reg rIR_in;
 		wire [8:0] QIR;
 		
+		reg opcode[2:0] // James -> Added for compiler to read top to bottom
 		assign IR_DEBUG = {sel, opcode, 3'b0};
 
     // ----------------- instantiate registers:-----------------
@@ -117,7 +118,7 @@ output [8:0] IR_DEBUG);
 	
 	 // note: the following are driven by the combinational logic block below
     reg type; // 0 -> type 1, 1 -> type 2
-	 reg [2:0] opcode; // 
+
 	 reg [2:0] Rx; // addr of first register to access
 	 reg [2:0] Ry; // addr of 2nd  register to access
 	 	 

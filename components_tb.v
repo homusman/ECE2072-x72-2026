@@ -1,11 +1,20 @@
 `timescale 1ns / 1ps
 
-module components_tb();
+module components_tb_syntheisised();
+
+//Defining global  flags:
+	reg sign_tick_done = 0;   // set after sign extender + tick FSM tests finish
+	reg alu_done  = 0;   // set after s finish
+	reg mux_done  = 0;   // set after multiplexer tests finish
+	reg register_done = 0;
+
+
+
 
 // initialise logging variables
-	integer count_sign_extender = 0;
-	integer errors_sign_extender = 0;
-	integer errors_tick_FSM = 0;
+	integer sign_extender_count = 0;
+	integer sign_extender_errors = 0;
+	integer tick_FSM_errors = 0;
 	integer i = 0;
 
 // instantiate modules-under-test & input output
@@ -13,7 +22,7 @@ module components_tb();
 	reg signed [8:0] sign_extender_input;
 	wire signed [15:0] sign_extender_output;
 	
-	sign_extender sign_extender_i(.in(sign_extender_input),.ext(sign_extender_output));
+	sign_extend sign_extender_i(.in(sign_extender_input),.ext(sign_extender_output));
 	
 	initial begin
 		sign_extender_input = 0;
@@ -39,6 +48,7 @@ module components_tb();
 
 // Test cases
     initial begin
+	 $display("----------------BEGINNING OF SIGN EXTENDER TESTS-------------------");
         // ===== TEST 1: sign extender (exhaustive, all 512 inputs) =====
         for (i = 0; i < 512; i = i + 1) begin
             sign_extender_input = i[8:0];
@@ -47,19 +57,19 @@ module components_tb();
             // both operands are signed, so Verilog sign-extends the narrower one;
             // equality therefore means the decimal values match
             if ($signed(sign_extender_input) !== $signed(sign_extender_output)) begin
-                errors_sign_extender = errors_sign_extender + 1;
+                sign_extender_errors = sign_extender_errors + 1;
                 $display("sign extender error! input: %0d, output: %0d",
                          sign_extender_input, sign_extender_output);
             end
-            count_sign_extender = count_sign_extender + 1;
+            sign_extender_count = sign_extender_count + 1;
         end
 
-        if (errors_sign_extender == 0)
-            $display("sign extender: passed all %0d test cases!", count_sign_extender);
+        if (sign_extender_errors == 0)
+            $display("sign extender: passed all %0d test cases!\n-------------------------------------------------", sign_extender_count);
         else
-            $display("sign extender: failed with %0d errors out of %0d cases",
-                     errors_sign_extender, count_sign_extender);
-
+            $display("sign extender: failed with %0d errors out of %0d cases\n -------------------------------------------------",
+                     sign_extender_errors, sign_extender_count);
+$display("\n\n\n----------------BEGINNING OF TICK FSM TESTS-------------------");
         // ===== TEST 2: tick FSM =====
 		tick_FSM_rst = 1; // reset the counter prior to testing
 		#10; 
@@ -68,7 +78,7 @@ module components_tb();
 		tick_FSM_rst = 0;
 		tick_FSM_en  = 1;
 		if (tick_FSM_outputs !== 4'b0001) begin
-             errors_tick_FSM = errors_tick_FSM + 1;
+             tick_FSM_errors = tick_FSM_errors + 1;
              $display("tick FSM error at step 1: got %b", tick_FSM_outputs);
         end
 		
@@ -76,28 +86,28 @@ module components_tb();
 
 		// 2. 2nd state works? 
 		if (tick_FSM_outputs !== 4'b0010) begin
-             errors_tick_FSM = errors_tick_FSM + 1;
+             tick_FSM_errors = tick_FSM_errors + 1;
              $display("tick FSM error at step 2: got %b", tick_FSM_outputs);
         end
         #10
 
 		// 3. 3rd state works? 
 		if (tick_FSM_outputs !== 4'b0100) begin
-             errors_tick_FSM = errors_tick_FSM + 1;
+             tick_FSM_errors = tick_FSM_errors + 1;
              $display("tick FSM error at step 3: got %b", tick_FSM_outputs);
         end
         #10
 
 		// 4. 4th state works? 
 		if (tick_FSM_outputs !== 4'b1000) begin
-             errors_tick_FSM = errors_tick_FSM + 1;
+             tick_FSM_errors = tick_FSM_errors + 1;
              $display("tick FSM error at step 4: got %b", tick_FSM_outputs);
         end
         #10
 
 		// 5. wraps back to state 1? 
 		if (tick_FSM_outputs !== 4'b0001) begin
-             errors_tick_FSM = errors_tick_FSM + 1;
+             tick_FSM_errors = tick_FSM_errors + 1;
              $display("tick FSM error at step 5, didnt wrap back: got %b", tick_FSM_outputs);
         end
 		
@@ -107,20 +117,36 @@ module components_tb();
         #10
 
 		if (tick_FSM_outputs !== 4'b00001) begin
-             errors_tick_FSM = errors_tick_FSM + 1;
+             tick_FSM_errors = tick_FSM_errors + 1;
              $display("tick FSM error at step 6: got %b", tick_FSM_outputs);
         end
 
 		// summarise tick FSM test results
-        if (errors_tick_FSM == 0)
-            $display("tick FSM: passed all test cases!");
+        if (tick_FSM_errors == 0)
+            $display("tick FSM: passed all test cases!\n---------------------------------------------------------");
         else
-            $display("tick FSM: failed %d test cases!", errors_tick_FSM);
+            $display("tick FSM: failed %d test cases!\n-----------------------------------------------------------", tick_FSM_errors);
 
-        $stop;
+        sign_tick_done = 1;
     end
-	 
-	 	reg  [15:0] input_a;
+//==========================James' testbenches integration =================================
+//	\																												/
+//		\																										/
+//			\																								/
+//				\																						/
+//					\																				/
+//						\																		/
+//							\																/
+//								\														/
+//									\												/	
+//										\										/
+//											\								/
+//												\						/
+//													\				/
+//														\		/
+//														  \ /
+// =====================================================================
+	reg  [15:0] input_a;
 	reg  [15:0] input_b;
    reg  [2:0]  alu_op;
 	reg [15:0] trueValue;
@@ -130,16 +156,19 @@ module components_tb();
 	wire [15:0] modValue; // Module Value
 	
 	// Control Variables:
-	integer count, errors, endFlag;
-	 
+	integer alu_count, alu_errors, endFlag_alu, endFlag;
+	
+	
+	
 	initial begin
-		  errors = 16'd0;
+		alu_errors = 16'd0;
+		  endFlag_alu = 0;
+		  alu_count = 0;
 		  endFlag = 0;
-		  count = 0;
   
 	end
     
-    alu alu_intantitate(
+    ALU alu_intantitate(
         .input_a(input_a),
         .input_b(input_b),
         .alu_op(alu_op),
@@ -160,6 +189,9 @@ module components_tb();
 	
 	//move in counts of 10, errorchecking occures every 10 ticks
 	initial begin
+	wait(sign_tick_done);
+	$display("\n\n\n----------------BEGINNING OF ALU TESTS-------------------");
+
 	//Overflow occurs when the result of a * b, a + b, b << a caused the bits to slip
 	//Test largest possible overflow: 15'd
 	
@@ -377,40 +409,55 @@ module components_tb();
 	
 	always begin
 	#9;
+	// sign tick is done withou alu being one only occurs during the alu testbench which stops the error checkks from evaluating after it's fnished.
+	if (sign_tick_done && !alu_done) begin
 	
 		if (endFlag == 1) begin
-			if (errors == 0)
-				$display("success: All tests passed");
+			if (alu_errors == 0)
+				$display("success: All tests passed--------------------------------------------------------------");
 			
 			else begin
-				$display("Failed, there were %0d errors out of %0d tests", errors, count);       
+				$display("Failed, there were %0d errors out of %0d tests------------------------------------------------", alu_errors, alu_count);       
 			end
-			$finish;
+			
+			alu_done = 1;
 		end
+		else begin
 		
-		count = count + 1;
+			alu_count = alu_count + 1;
 		
-		if (trueValue !== modValue) begin
+			if (trueValue !== modValue) begin
 				$display("Failure: Op code was %0d, Input A: %0d, Input B: %0d, Expected output %0d, Module output %0d",  alu_op, input_a, input_b, trueValue, modValue);
-				errors = errors + 1;
+				alu_errors = alu_errors + 1;
+			end
+			else begin
+				$display("PASS: Op code was %0d, Input A: %0d, Input B: %0d, Expected output %0d, Module output %0d",  alu_op, input_a, input_b, trueValue, modValue);
+			end
+			
 		end
+	end
 		#1;
 	end
 		
 		reg  [15:0] R0, R1, R2, R3, R4;
 	reg  [15:0] R5, R6, R7, SignExtDin, G;
 	reg  [4:0]  sel;                    
-	reg  [15:0] trueValue;       
-			
+	reg  [15:0] mux_trueValue;      
+	
 	// Outputs are driven so wires are needed:
 	
-	wire [15:0] modValue; // Module Value
+	wire [15:0] mux_modValue;
 	
 	// Control Variables:
-	integer count, errors;
-	 
+	integer mux_count, mux_errors; 
+
 	initial begin
-	 
+	wait(alu_done);
+	$display("\n\n\n----------------BEGINNING OF MUX TESTS-------------------");
+	end
+	
+	initial begin
+	
         // Declare first test input/s
         R0 = 16'd0; R1 = 16'd1; R2 = 16'd2; R3 = 16'd3; R4 = 16'd4;
         R5 = 16'd5; R6 = 16'd6; R7 = 16'd7; SignExtDin = 16'd8; G = 16'd9;
@@ -429,88 +476,222 @@ module components_tb();
         .SignExtDin(SignExtDin),
         .G(G),
         .sel(sel),
-        .Bus(modValue)
+        .Bus(mux_modValue)
     );
   
     
 
 	initial begin
 		// Initialise control variables:
-		errors = 0;
+		mux_errors = 0;
 	
 	end
 	
 	always begin
+	wait (alu_done);
 	#10
 	sel = sel + 1;
 	end
-	
+
+	// Okay to keep cycling since there will be no input or evaluation so it's just rubbish that isn't affectign any other testbench
 	always @(*) begin
 
 	//Should trigger on sel being activated
 	                  
 		if (sel == 4'd0) 
-			trueValue = R0;
+			mux_trueValue  = R0;       
 			
 		else if (sel == 4'd1) 
-			trueValue = R1;
+			mux_trueValue  = R1;       
 			
 		else if (sel == 4'd2) 
-			trueValue = R2;
+			mux_trueValue  = R2;       
 			
 		else if (sel == 4'd3) 
-			trueValue = R3;
+			mux_trueValue  = R3;       
 			
 		else if (sel == 4'd4) 
-			trueValue = R4;
+			mux_trueValue  = R4;       
 			
 		else if (sel == 4'd5) 
-			trueValue = R5;
+			mux_trueValue  = R5;       
 			
 		else if (sel == 4'd6) 
-			trueValue = R6;
+			mux_trueValue  = R6;       
 			
 		else if (sel == 4'd7) 
-			trueValue = R7;
+			mux_trueValue  = R7;       
 			
 		else if (sel == 4'd8) 
-			trueValue = SignExtDin;
+			mux_trueValue  = SignExtDin;
 			
 		else if (sel == 4'd9) 
-			trueValue = G;
+			mux_trueValue  = G;       
 			
 		else                 
-			trueValue = 16'd0;
-	
+			mux_trueValue = 16'd0;     
+			
 		
 	end
 	
 	always begin
 	# 7
+	if (alu_done && !mux_done) begin
 	
 		if (sel > 4'b1111) begin
-			if (errors == 0) begin
-				$display("success: %0d tests passed", sel);
+			if (mux_errors == 0) begin
+				$display("Success: %0d tests passed-----------------------------------------------------", sel);
 			
 			end
 			else begin
-				$display("%0d errors out of %0d tests", errors, sel);
+				$display("Failiure: %0d errors out of %0d tests-----------------------------------------------------", mux_errors, sel);
 			
 			end
 		
-		$finish;
+		mux_done = 1;
 		
 		end
+		else begin
 		
-		if (trueValue !== modValue) begin
-			$display("Failure: Selected line value was %0d, expected output was Input %0d, Module outputted %0d", sel, trueValue, modValue);
-			errors = errors + 1;
-		
+			if (mux_trueValue !== mux_modValue) begin
+				$display("Failure: Selected line value was %0d, expected output was Input %0d, Module outputted %0d", sel, mux_trueValue, mux_modValue);
+				mux_errors = mux_errors + 1;
+			end
+			else begin
+				$display("PASS: Selected line value was %0d, expected output was Input %0d, Module outputted %0d", sel, mux_trueValue, mux_modValue);	
+			end
 		end
+	end
 
 	#3;
 		
 	end
 
+ // setup wires/registers:
+	reg [15:0] expected_val;
+	reg rst;
+	reg r_in;
+	reg [15:0] data_in;
+	reg [1:0]rstRin;	 
+	wire [15:0] module_val;
 
-endmodule 
+	register_n instantiate_register (
+		.data_in (data_in),
+		.r_in    (r_in),
+		.clk     (clk),	
+		.rst     (rst),
+		.Q       (module_val)
+	);
+	 
+	
+	integer register_count, register_errors;
+	
+	initial begin
+	wait(mux_done)
+	$display("\n\n\n----------------BEGINNING OF REGISTER TESTS-------------------");
+	end
+	
+	initial begin
+		register_count = 0;
+		register_errors = 0;
+		rstRin = 2'b11;
+		
+		rst = 0;
+		r_in = 1;
+		data_in = $random;
+		expected_val = data_in;
+		
+// Declaring random values to be in the register so that initial case can be evaluated.
+		
+	end
+	
+	// case statement goes here
+	
+	// Testing each op code and rest variation for the register
+	// Testing each combination of in_line is considered out of 
+	//scope for as brute force would be a lenthy processing time.
+	
+	// Test cases to consider:
+	// Make sure a full register is set to zero for each opcall
+	// Make sure each
+	
+	//rst and rin count goes from 00, to 01 to 10 to 11
+	//thats rst = 0 rin = 0, rst = 0 rin = 1, rst = 1 rin = 0, rst = 1, rin = 1;
+	
+	
+// Reading happends on the positive edge, error check happends during the negative edge
+	always @(negedge clk) begin
+	
+		case (register_count)
+// ----------------- Testing that each combination of rst and r_in work with random values ------------------
+		1:begin
+			rst = rstRin[1];
+			r_in = rstRin[0];
+// rst is 0 and r_in is 0 so the register holds its value even though data_in changes.
+			data_in = $random;
+			expected_val = expected_val;
+		end
+		
+		2:begin
+			rst = rstRin[1];
+			r_in = rstRin[0];
+// rst is 0 and r_in is 1 so the new data line is led into the register
+			data_in = $random;
+			expected_val = data_in;
+		end
+		
+		3:begin
+			rst = rstRin[1];
+			r_in = rstRin[0];
+// rst is 1 and r_in is 0, the register resets to zero regardless of its contents.
+			data_in = $random;
+			expected_val = 0;
+		end
+			
+		4:begin
+			rst = rstRin[1];
+			r_in = rstRin[0];
+// rst is 1 and r_in is 1, reset takes priority so the register should be zero.
+			data_in = $random;
+			expected_val = 0;
+		end
+// --------------------------------------------------------------------------------------------------------	
+		endcase
+	end
+	
+// Does the error checking
+	always @(posedge clk) begin
+	
+	#3
+	if (mux_done) begin
+		if (register_count == 5) begin // set to the number of cases
+			if (register_errors == 0) begin
+				$display("Success, All tests passed-------------------------------------------------");
+		end
+			else begin
+				$display("Fail, %0d out of %0d tests failed---------------------------------------------------",mux_errors, mux_count);
+			end
+			$finish;
+			end
+		
+		
+		if (expected_val !== module_val) begin
+			
+			//Wait for the module to update.
+			$display("FAIL on count %0d: Expected %d, Got %d from inputs -> data_in: %0d, rst: %0d and r_in: %0d", register_count, expected_val, module_val, data_in, rst, r_in);
+			register_errors = register_errors + 1;
+		end
+		else begin
+			$display("PASS: Expected %d, Got %d from inputs rst: %0d and r_in: %0d", expected_val, module_val, rst, r_in);
+		end
+		register_count = register_count + 1;
+		rstRin = rstRin + 1;
+	end
+		
+	#2;
+		
+	end
+	
+
+
+endmodule
