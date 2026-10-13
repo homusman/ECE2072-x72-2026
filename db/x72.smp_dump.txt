@@ -1,7 +1,0 @@
-
-State Machine - |tick_FSM_top|tick_FSM:u_fsm|current_state
-Name current_state.1000 current_state.0100 current_state.0010 current_state.0001 
-current_state.0001 0 0 0 0 
-current_state.0010 0 0 1 1 
-current_state.0100 0 1 0 1 
-current_state.1000 1 0 0 1 
