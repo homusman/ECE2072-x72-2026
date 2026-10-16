@@ -70,8 +70,6 @@ output [8:0] IR_DEBUG);
 		// Instruction register
 		reg rIR_in;
 		wire [8:0] QIR;
-		
-		assign IR_DEBUG = {sel, opcode, 3'b0};
 
     // ----------------- instantiate registers:-----------------
 	 register_n #(.N(16)) Reg0(.data_in(bus), .r_in(r_in[0]), .clk(clk), .Q(Q0), .rst(rst));
@@ -120,6 +118,7 @@ output [8:0] IR_DEBUG);
 	 reg [2:0] opcode; // 
 	 reg [2:0] Rx; // addr of first register to access
 	 reg [2:0] Ry; // addr of 2nd  register to access
+	 assign IR_DEBUG = {sel, opcode, 3'b0};
 	 	 
 	 // CU control logic (note that this is entirely combinational logic driven by the tick_FSM state
 	 always @(*) begin
