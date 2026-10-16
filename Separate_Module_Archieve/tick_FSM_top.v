@@ -8,7 +8,7 @@ module tick_FSM_top(
     tick_FSM u_fsm (
         .clk (~KEY[1]),          // rising edge on press
         .rst (~KEY[0]),
-        .en  (SW[0]),
+        .enable  (SW[0]),
         .tick(tick)
     );
 
