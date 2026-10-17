@@ -26,7 +26,7 @@ output [8:0] IR_DEBUG);
 	 
     // ------------------ declare wires: ------------------
 		
-		// register output wires
+		// register output wires --> Clear port name notion but redundant code.
 		 wire [15:0] Q0;
 		 wire [15:0] Q1;
 		 wire [15:0] Q2;

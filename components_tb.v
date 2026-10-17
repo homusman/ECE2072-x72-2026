@@ -655,6 +655,8 @@ $display("\n\n\n----------------BEGINNING OF TICK FSM TESTS-------------------")
 			data_in = $random;
 			expected_val = 0;
 		end
+		
+		// To do: FOR LOOP 10 COUNTS FOR each value randomising each one
 // --------------------------------------------------------------------------------------------------------	
 		endcase
 	end
