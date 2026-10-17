@@ -25,6 +25,7 @@ module simple_proc_tb();
 	integer errors = 0;
 	integer i = 9'b0;
 	integer j = 9'b0;
+	integer k = 9'b0;
 	
 	// get clocking
 	always begin
@@ -59,7 +60,7 @@ module simple_proc_tb();
 		#10;
 		if (tick != 4'b0001) begin
                 errors = errors + 1;
-                $display("Error: CPU doesnt reset");
+                $display("Error: CPU tick counter doesnt reset");
             end
 		
 		// test 4: mixed ALU tests (exhaustive);
@@ -149,6 +150,107 @@ module simple_proc_tb();
 							end
 				end
 			end
+
+			// test 5: reset clears registers?
+
+			rst = 1;
+
+			#10;
+
+			rst = 0;
+
+			if (tick != 4'b0001) begin
+                errors = errors + 1;
+                $display("Error: CPU tick counter doesnt reset");
+            end
+			if (R0 != 16'b0) begin
+                errors = errors + 1;
+                $display("Error: register 0 did not reset");
+            end
+			if (R1 != 16'b0) begin
+                errors = errors + 1;
+                $display("Error: register 1 did not reset");
+            end
+			if (R2 != 16'b0) begin
+                errors = errors + 1;
+                $display("Error: register 2 did not reset");
+            end
+			if (R3 != 16'b0) begin
+                errors = errors + 1;
+                $display("Error: register 3 did not reset");
+            end
+			if (R4 != 16'b0) begin
+                errors = errors + 1;
+                $display("Error: register 4 did not reset");
+            end
+			if (R5 != 16'b0) begin
+                errors = errors + 1;
+                $display("Error: register 5 did not reset");
+            end
+			if (R6 != 16'b0) begin
+                errors = errors + 1;
+                $display("Error: register 6 did not reset");
+            end
+			if (R7 != 16'b0) begin
+                errors = errors + 1;
+                $display("Error: register 7 did not reset");
+            end
+
+			// test 6: see if add works between all registers. ensure mux is working ok
+			for (i = 0; i <= 7; i = i + 1) begin
+				for (j = 0; j <= 7; j = j + 1) begin
+					// assign inital register values equal to index to easily check if correct pair were added
+					// yes possible for incorrect pair to give correct sum but good enough 
+					// load Rk = k using movi, one full instruction (4 ticks) per register
+						rst = 1;
+
+						#10;
+						rst = 0;
+					
+					for (k = 0; k <= 7; k = k + 1) begin
+						// tick 1: load IR (opcode 7 = movi, Rx = k)
+						din = {3'd7, k[2:0], 3'b000};
+						#10;
+
+						// tick 2: immediate on the bus, saved into Rx
+						din = k[8:0];
+						#10;
+
+						// ticks 3 & 4: idle
+						#20;
+					end
+					if (i != j) begin
+						//tick 1: load IR
+						din = {3'd1,i[2:0],j[2:0]};
+						#10;
+
+						//tick 2: load Rx
+						if (bus != i) begin
+							errors = errors + 1;
+							$display("Error: bus is not Rx! Should be %d but got %d", i, bus);
+						end
+						#10
+
+						//tick 3: load Ry
+						if (bus != j) begin
+							errors = errors + 1;
+							$display("Error: bus is not Ry! Should be %d but got %d", j, bus);
+						end
+						#10
+
+						//tick 4: result
+						if (bus != i+j) begin
+							errors = errors + 1;
+							$display("Error: bus is not Rx + Ry! Sum should be %d but got", i + j, bus);
+						end
+					end
+				end
+			end
+
+			// test 7: overflow test
+
+
+
 	
 	
 			
