@@ -2,7 +2,9 @@
 Monash University ECE2072: Assignment 
 This file contains Verilog code to implement individual the CPU.
 
-Please enter your student ID: 33857288
+Please enter your student ID: 
+James: 33964254
+Thomas: 33857288
 
 */
 module simple_proc(
@@ -19,8 +21,9 @@ output [15:0] R3,
 output [15:0] R4,
 output [15:0] R5,
 output [15:0] R6,
-output [15:0] R7,
-output [8:0] IR_DEBUG);
+output [15:0] R7
+/*,output [8:0] IR_DEBUG*/ // for debug!
+);
 
     // Note: The skeleton you are provided with includes output ports to output the values of the internal registers R0 - R7, for the purpose of test benching. When instantiating the processor to program your DE10-lite, you can leave these ports unused.
 	 
@@ -72,7 +75,7 @@ output [8:0] IR_DEBUG);
 		wire [8:0] QIR;
 		
 		reg [2:0]opcode; // James -> Added for compiler to read top to bottom
-		assign IR_DEBUG = {sel, opcode, 3'b0};
+		// assign IR_DEBUG = {sel, opcode, 3'b0};
 
 
     // ----------------- instantiate registers:-----------------
@@ -118,22 +121,22 @@ output [8:0] IR_DEBUG);
 	 //3 - Subtraction (sub)
 	
 	 // note: the following are driven by the combinational logic block below
-    reg type; // 0 -> type 1, 1 -> type 2
-
+	 
 	 reg [2:0] Rx; // addr of first register to access
 	 reg [2:0] Ry; // addr of 2nd  register to access
-	 assign IR_DEBUG = {sel, opcode, 3'b0};
+	 
+	 //assign IR_DEBUG = {sel, opcode, 3'b0};
 	 	 
 	 // CU control logic (note that this is entirely combinational logic driven by the tick_FSM state
 	 always @(*) begin
         // ----------------- Turn off all control signals:-----------------
 
-			r_in = 16'b0;
+			r_in = 8'b0;
 			rA_in = 0;
 			rG_in = 0;
 			rIR_in = 0;
 			sel = 4'd8; // default to DIN on the bus
-			ALU_op = 2'd0;
+			ALU_op = 3'd0;
 			
 			
         // ----------------- Turn on specific control signals based on current tick:-----------------
@@ -175,12 +178,12 @@ output [8:0] IR_DEBUG);
 							
 							// set the ALU operation
 							case(opcode)
-								1: ALU_op = 1;
-								2: ALU_op = 1;
-								3: ALU_op = 2;
-								4: ALU_op = 0;
-								5: ALU_op = 3;
-								default: ALU_op = 1; // arbitrarily set operation as 1 as default for non ALU instructions
+								1: ALU_op = 3'd1;
+								2: ALU_op = 3'd1;
+								3: ALU_op = 3'd2;
+								4: ALU_op = 3'd0;
+								5: ALU_op = 3'd3;
+								default: ALU_op = 3'bxxx;
 							endcase
 							
 							// get the result into reg G
@@ -192,12 +195,12 @@ output [8:0] IR_DEBUG);
 							
 							// set the ALU operation
 							case(opcode)
-								1: ALU_op = 1;
-								2: ALU_op = 1;
-								3: ALU_op = 2;
-								4: ALU_op = 0;
-								5: ALU_op = 3;
-								default: ALU_op = 1; // arbitrarily set operation as 1 as default for non ALU instructions
+								1: ALU_op = 3'd1;
+								2: ALU_op = 3'd1;
+								3: ALU_op = 3'd2;
+								4: ALU_op = 3'd0;
+								5: ALU_op = 3'd3;
+								default: ALU_op = 3'bxxx;
 							endcase
 							
 							// get the result into reg G

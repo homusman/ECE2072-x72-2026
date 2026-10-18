@@ -2,8 +2,11 @@
 Monash University ECE2072: Assignment 
 This file contains Verilog code to implement individual components to be used in 
     the CPU.
-
+/ Worked on: 12/10
+	 
 Please enter your name and student ID:
+James: 33964254
+Thomas: 33857288
 
 */
 module sign_extend(input [8:0] in, output [15:0] ext);
@@ -114,13 +117,13 @@ module ALU(
             3'd0 : result = input_a * input_b;
             3'd1 : result = input_a + input_b;
             3'd2 : result = input_a - input_b;
-				3'd3 : begin
+				3'd3 : begin // note: SSI implements a logical shift as required in "processors, datapaths" lesson page 1
 								if (input_a < 0)
-									result = input_b >> (-input_a); //negate a to ensure that the correct amount is pushed back
+									result = input_b >> $unsigned(-input_a); // explicit unsigned conversion, -input_a guaranteed to be positive i this branch
 								else
-									result = input_b << input_a;
+									result = input_b << $unsigned(input_a); // explicit unsigned conversion, input_a guaranteed to be positive in this branch
 							end
-            default : result = 16'bx;
+            default : result = 16'bxxxxxxxxxxxxxxxx;
         endcase
     end
 

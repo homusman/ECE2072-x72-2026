@@ -1,5 +1,17 @@
+/*
+Monash University ECE2072: Assignment 
+This file contains Verilog code to implement individual the CPU.
+
+Please enter your student ID: 
+James: 33964254
+Thomas: 33857288
+
+AI declaration:
+AI was used to generate the BCD mapping constants
+*/
+
 module proc_top_level(
-    input  [9:0] SW,
+    input  [8:0] SW,
     input  [1:0] KEY,
     output [9:0] LEDR,
     output [6:0] HEX5,
@@ -16,8 +28,9 @@ module proc_top_level(
         .din    (SW[8:0]),
         .bus    (bus),
         .tick   (tick),
-        .R0(), .R1(), .R2(), .R3(), .R4(), .R5(), .R6(), .R7(),
-		  .IR_DEBUG() );
+        .R0(), .R1(), .R2(), .R3(), .R4(), .R5(), .R6(), .R7()
+		  //,.IR_DEBUG() // for debug!
+		  );
 
     assign LEDR = bus[9:0];
 
