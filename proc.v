@@ -21,8 +21,9 @@ output [15:0] R3,
 output [15:0] R4,
 output [15:0] R5,
 output [15:0] R6,
-output [15:0] R7,
-output [8:0] IR_DEBUG);
+output [15:0] R7
+/*,output [8:0] IR_DEBUG*/ // for debug!
+);
 
     // Note: The skeleton you are provided with includes output ports to output the values of the internal registers R0 - R7, for the purpose of test benching. When instantiating the processor to program your DE10-lite, you can leave these ports unused.
 	 

@@ -2,25 +2,11 @@
 Monash University ECE2072: Assignment 
 This file contains Verilog code to implement the extended version of CPU.
 
-/* James and Thomas Extension module
-// Worked on 16/10/2026
+James and Thomas Extension module
+Worked on 16/10/2026
 
 James: 33964254
 Thomas: 33857288
-
-
- // TODO: Copy and paste your task 2 into here
-
- 
- // Breif on what to do:
- 
-
-		The Rx output needs to be displayed on the HEX as a decimal integer.
-
-Monash University ECE2072: Assignment 
-This file contains Verilog code to implement individual the CPU.
-
-Please enter your student ID: 33857288
 
 */
 module proc_extension(
@@ -38,8 +24,8 @@ output [15:0] R4,
 output [15:0] R5,
 output [15:0] R6,
 output [15:0] R7,
-output [15:0] display, // Out is clear so display will not be wired to another output.
-output [8:0] IR_DEBUG
+output [15:0] display // Out is clear so display will not be wired to another output.
+/*, output [8:0] IR_DEBUG*/ // for debug!
 
 );
     // Note: The skeleton you are provided with includes output ports to output the values of the internal registers R0 - R7, for the purpose of test benching. When instantiating the processor to program your DE10-lite, you can leave these ports unused.
