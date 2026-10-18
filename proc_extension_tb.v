@@ -23,7 +23,7 @@ module proc_extension_tb();
 	// instantiate cpu
 	proc_extension procExt_1(.clk(clk), .rst(rst), .enable(enable), .din(din), .bus(bus), .tick(tick),
 	                         .R0(R0), .R1(R1), .R2(R2), .R3(R3), .R4(R4), .R5(R5), .R6(R6), .R7(R7),
-	                         .display(display_val), .IR_DEBUG());
+	                         .display(display_val));
 	
 	
 	// init logging vars

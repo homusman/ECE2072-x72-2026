@@ -42,8 +42,7 @@ module proc_top_level__extension(
         .din    (SW[8:0]),
         .bus    (bus),
         .tick   (tick),
-        .R0(), .R1(), .R2(), .R3(), .R4(), .R5(), .R6(), .R7(), .display(display_Val),
-		  .IR_DEBUG() );
+        .R0(), .R1(), .R2(), .R3(), .R4(), .R5(), .R6(), .R7(), .display(display_Val));
 
     assign LEDR = bus[9:0];
 
