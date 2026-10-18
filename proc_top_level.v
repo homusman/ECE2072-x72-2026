@@ -1,3 +1,15 @@
+/*
+Monash University ECE2072: Assignment 
+This file contains Verilog code to implement individual the CPU.
+
+Please enter your student ID: 
+James: 33964254
+Thomas: 33857288
+
+AI declaration:
+AI was used to generate the BCD mapping constants
+*/
+
 module proc_top_level(
     input  [9:0] SW,
     input  [1:0] KEY,

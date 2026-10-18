@@ -2,8 +2,11 @@
 Monash University ECE2072: Assignment 
 This file contains Verilog code to implement individual components to be used in 
     the CPU.
-
+/ Worked on: 12/10
+	 
 Please enter your name and student ID:
+James: 33964254
+Thomas: 33857288
 
 */
 module sign_extend(input [8:0] in, output [15:0] ext);

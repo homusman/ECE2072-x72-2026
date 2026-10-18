@@ -6,7 +6,7 @@ This file contains Verilog code to implement the extended version of CPU.
 // Worked on 16/10/2026
 
 James: 33964254
-Thomas: 
+Thomas: 33857288
 
 
  // TODO: Copy and paste your task 2 into here

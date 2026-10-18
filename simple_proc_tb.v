@@ -1,3 +1,12 @@
+/*
+Monash University ECE2072: Assignment 
+This file contains Verilog code to implement individual the CPU.
+
+Please enter your student ID: 
+James: 33964254
+Thomas: 33857288
+*/
+
 `timescale 1ns / 1ps
 
 module simple_proc_tb();

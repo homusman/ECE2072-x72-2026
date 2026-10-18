@@ -2,7 +2,9 @@
 Monash University ECE2072: Assignment 
 This file contains Verilog code to implement individual the CPU.
 
-Please enter your student ID: 33857288
+Please enter your student ID: 
+James: 33964254
+Thomas: 33857288
 
 */
 module simple_proc(
