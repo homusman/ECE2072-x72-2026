@@ -1,0 +1,202 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/Altera_Sims
+vALU
+Z1 !s110 1792319404
+!i10b 1
+!s100 z4>JQN5n0l2fbZVTfH[3P0
+IE:0V?;@4j1b=n]`Q2UN1Z0
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+Z3 w1791877707
+Z4 8C:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/components.v
+Z5 FC:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/components.v
+L0 105
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1792319404.000000
+Z8 !s107 C:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/components.v|
+Z9 !s90 -reportprogress|300|-work|work2|-stats=none|C:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/components.v|
+!i113 1
+Z10 o-work work2
+Z11 tCvgOpt 0
+n@a@l@u
+vBinaryCodedDecimal_divide
+R1
+!i10b 1
+!s100 jmL4akd>_0b:ozj^OOUT42
+IZgfFFEn76To>h5G;Dh4881
+R2
+R0
+w1792131879
+8C:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/BinaryCodedDecimal_divide_bb.v
+FC:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/BinaryCodedDecimal_divide_bb.v
+L0 34
+R6
+r1
+!s85 0
+31
+R7
+!s107 C:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/BinaryCodedDecimal_divide_bb.v|
+!s90 -reportprogress|300|-work|work2|-stats=none|C:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/BinaryCodedDecimal_divide_bb.v|
+!i113 1
+R10
+R11
+n@binary@coded@decimal_divide
+vmultiplexer
+R1
+!i10b 1
+!s100 5XVz<PL5fU>Cc7TCOA>bK0
+IQRn7PH^L^FCSHPME5Wbi41
+R2
+R0
+R3
+R4
+R5
+L0 79
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vproc_extension
+R1
+!i10b 1
+!s100 Sz6O6Kb@8bal<aaFYFXXc3
+I5cACzPH5c8aEWE0HXTiS[1
+R2
+R0
+w1792142731
+8C:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/proc_extension.v
+FC:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/proc_extension.v
+L0 26
+R6
+r1
+!s85 0
+31
+R7
+!s107 C:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/proc_extension.v|
+!s90 -reportprogress|300|-work|work2|-stats=none|C:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/proc_extension.v|
+!i113 1
+R10
+R11
+vproc_extension_tb
+R1
+!i10b 1
+!s100 gA2ZZ9S9gYBOD?HfXjzd>0
+IBbJKa7M^PHU`U_>XAf0221
+R2
+R0
+w1792317711
+8C:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/proc_extension_tb.v
+FC:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/proc_extension_tb.v
+L0 3
+R6
+r1
+!s85 0
+31
+R7
+!s107 C:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/proc_extension_tb.v|
+!s90 -reportprogress|300|-work|work2|-stats=none|C:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/proc_extension_tb.v|
+!i113 1
+R10
+R11
+vproc_top_level__extension
+R1
+!i10b 1
+!s100 6TMSH?WzR7L?OcO1f05Qm0
+I=Wg^XOMi7U`TYGNZV4W521
+R2
+R0
+w1792141212
+8C:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/proc_top_level__extension.v
+FC:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/proc_top_level__extension.v
+L0 14
+R6
+r1
+!s85 0
+31
+R7
+!s107 C:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/proc_top_level__extension.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/james/OneDrive/Documents/GitHub/ECE2072-x72-2026/proc_top_level__extension.v|
+!i113 1
+o-work work
+R11
+vregister_n
+R1
+!i10b 1
+!s100 [UDFfWz?PI_oI770KK;Vf2
+I=YabBj:RPM:OTQ@fcRT^:1
+R2
+R0
+R3
+R4
+R5
+L0 130
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vsign_extend
+R1
+!i10b 1
+!s100 2`GeX18>OYB]NiBHoA19P2
+Io@BHd8:=]S0fiEhhd<=2T3
+R2
+R0
+R3
+R4
+R5
+L0 9
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vtick_FSM
+R1
+!i10b 1
+!s100 LLK@Un_hAg[X@6hD00@283
+I]PlR5O6D=J9V:0XGV=XKG3
+R2
+R0
+R3
+R4
+R5
+L0 20
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+ntick_@f@s@m

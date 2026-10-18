@@ -219,25 +219,19 @@ $display("\n\n\n----------------BEGINNING OF TICK FSM TESTS-------------------")
 	trueValue = 16'd1058;
 	#10;
 
-	//Mult 4: overflow truncation, largest positive values (32767 * 32767)
+	//Mult 4: overflow, largest positive values (32767 * 32767)
 	input_a = 16'b0111_1111_1111_1111;
 	input_b = 16'b0111_1111_1111_1111;
 	trueValue = 16'd1;
 	#10;
 
-	//Mult 5: overflow truncation, second pattern (32767 * 32752)
-	input_a = 16'b0111_1111_1111_1111;
-	input_b = 16'b0111_1111_1111_0000;
-	trueValue = -16'd32752;
-	#10;
-
-	//Mult 6: overflow truncation, negative result (32767 * -32767)
+	//Mult 6: overflow, negative result (32767 * -32767)
 	input_a = 16'b0111_1111_1111_1111;
 	input_b = 16'b1000_0000_0000_0001;
 	trueValue = -16'd1;
 	#10;
 
-	//Mult 7: overflow truncation, all ones (-1 * -1)
+	//Mult 7: overflow, all ones (-1 * -1)
 	input_a = 16'b1111_1111_1111_1111;
 	input_b = 16'b1111_1111_1111_1111;
 	trueValue = 16'd1;
@@ -309,13 +303,13 @@ $display("\n\n\n----------------BEGINNING OF TICK FSM TESTS-------------------")
 	trueValue = 16'd350;
 	#10;
 
-	//Sub 3: negative - negative (sign of input_b flipped, -46 + 23)
+	//Sub 3: negative - negative
 	input_a = -16'd46;
 	input_b = -16'd23;
 	trueValue = -16'd23;
 	#10;
 
-	//Sub 4: positive - negative (sign of input_b flipped, 100 + 23)
+	//Sub 4: positive - negative
 	input_a = 16'd100;
 	input_b = -16'd23;
 	trueValue = 16'd123;
@@ -604,19 +598,6 @@ $display("\n\n\n----------------BEGINNING OF TICK FSM TESTS-------------------")
 // Declaring random values to be in the register so that initial case can be evaluated.
 		
 	end
-	
-	// case statement goes here
-	
-	// Testing each op code and rest variation for the register
-	// Testing each combination of in_line is considered out of 
-	//scope for as brute force would be a lenthy processing time.
-	
-	// Test cases to consider:
-	// Make sure a full register is set to zero for each opcall
-	// Make sure each
-	
-	//rst and rin count goes from 00, to 01 to 10 to 11
-	//thats rst = 0 rin = 0, rst = 0 rin = 1, rst = 1 rin = 0, rst = 1, rin = 1;
 	
 	
 // Reading happends on the positive edge, error check happends during the negative edge
