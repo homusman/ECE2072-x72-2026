@@ -107,7 +107,7 @@ endmodule
 
 module ALU(
     input signed [15:0] input_a,
-    input  [15:0] input_b,
+    input signed [15:0] input_b,
     input  [2:0]  alu_op,
     output reg [15:0] result
 );
